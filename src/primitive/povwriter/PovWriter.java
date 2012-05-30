@@ -97,7 +97,7 @@ public class PovWriter implements POVInterface {
      * the union, reads from tmp file and writes to PovRAY file closes the
      * reader.
      */
-    public void declare() {
+    public void declare(StringBuilder include) {
         try {
             builder.endProcessingObjects(); // finish writing objects to tmp file
             PovrayColorFactory factory = PovrayColorFactory.getFactory();
@@ -108,7 +108,7 @@ public class PovWriter implements POVInterface {
             writer.append(factory.declareColours()); // declare sketch colors as reqd
             writer.append(tf.includeFinishes());
             writer.append(tf.declareTextures());
-            writer.append(builder.beginUnion());
+            writer.append(beginUnion(include));
             BufferedReader reader = new BufferedReader(new FileReader(builder.getTempName()));
             while (reader.ready()) {
                 writer.append(reader.readLine());
@@ -119,6 +119,17 @@ public class PovWriter implements POVInterface {
         } catch (IOException ex) {
             Logger.getLogger(PovWriter.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+     /**
+     * This is used to start union around processing objects
+     * @return UNION start String 
+     */
+    public StringBuilder beginUnion(StringBuilder include){
+        StringBuilder primitive = new StringBuilder(95); //89
+        primitive.append(include);
+        primitive.append(UNION);        
+        return primitive.append(PRIMITIVES);
     }
 
     /**

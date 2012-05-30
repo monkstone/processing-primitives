@@ -23,7 +23,7 @@ import processing.core.PApplet;
 import processing.core.PConstants;
 
 /**
- * This is the setup class for RawPovray that does the real work, revised
+ * This is the setup class for RecordPovray that does the real work, revised
  * version briefly flirted with command line options for their versatility, but
  * I now very much favour use of an ini file...
  *
@@ -34,9 +34,9 @@ public class PovExporter {
     private PApplet parent;
     private final String VERSION = "0.80";
     /**
-     * Interface to RawPovray as a String
+     * Interface to RecordPovray as a String
      */
-   // public static final String POV = "primitive.RawPovray";
+   // public static final String POV = "primitive.RecordPovray";
     private Options options;
     private Properties prop;
     private final String HOME = System.getProperty("user.home");
@@ -57,6 +57,7 @@ public class PovExporter {
     public Process povray = null;
     private boolean notwritten = true;
     private Texture currentTexture = null;
+    private RecordPovray raw;
 
     /**
      * PovExporter constructor to satisfy processing library requirement
@@ -123,23 +124,23 @@ public class PovExporter {
         options.addDeclare("ScaleP5", String.format("%.4f", scale));
     }
 
-    /**
-     * Set Line Width
-     *
-     * @param width float (avoid spurious precision)
-     */
-    public void lineWidth(float width) {
-        options.addDeclare("SWIDTH", String.format("%.2f", width));
-    }
-
-    /**
-     * Overloaded function to deal with in input Set Line Width
-     *
-     * @param width int (avoid spurious precision)
-     */
-    public void lineWidth(int width) {
-        options.addDeclare("SWIDTH", String.format("%d", width));
-    }
+//    /**
+//     * Set Line Width
+//     *
+//     * @param width float (avoid spurious precision)
+//     */
+//    public void lineWidth(float width) {
+//        options.addDeclare("SWIDTH", String.format("%.2f", width));
+//    }
+//
+//    /**
+//     * Overloaded function to deal with in input Set Line Width
+//     *
+//     * @param width int (avoid spurious precision)
+//     */
+//    public void lineWidth(int width) {
+//        options.addDeclare("SWIDTH", String.format("%d", width));
+//    }
 
     /**
      * Rotate processing sketch elements within PovRAY scene (Y)
@@ -375,7 +376,8 @@ public class PovExporter {
         if (getState(State.RECORDING)) {
             System.out.println(State.RECORDING);
             parent.noLights();    // let PovRAY do the lighting
-            parent.beginRaw("primitive.RawPovray", filename);
+            raw = new RecordPovray(filename);
+            raw.beginDraw();
         }
     }
 
@@ -387,7 +389,7 @@ public class PovExporter {
             this.primitiveWriter.closePrimitiveWriter();
             this.setState(State.RECORDED);
             System.out.println(State.RECORDED);
-            parent.endRaw();
+            raw.endDraw();
         }
         if ((this.getState(State.RECORDED)) && (povray == null)) {
             povray = this.rayTrace();

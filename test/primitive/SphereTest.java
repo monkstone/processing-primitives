@@ -31,7 +31,8 @@ public class SphereTest extends PApplet {
         export.setPovrayPath("/usr/local/bin/povray");
         export.chooseTemplate();
         export.createIniFile(dataPath("sphere.ini"), Quality.HIGH);
-        export.lineWidth(1);
+        export.addDeclareOption("ScaleP5", "0.15"); // custom declare,translates Y axis in PovRAY
+        export.addDeclareOption("TransYP5", "200");
     }
 
     /**

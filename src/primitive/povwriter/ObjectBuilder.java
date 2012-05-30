@@ -28,10 +28,10 @@ public class ObjectBuilder implements POVInterface {
 
     private File tmpFile;
     private BufferedWriter out;
-    private PovrayColorFactory factory;
+  //  private PovrayColorFactory factory;
 
     ObjectBuilder() {
-        factory = PovrayColorFactory.getFactory();
+     //   factory = PovrayColorFactory.getFactory();
         try {
             tmpFile = File.createTempFile("povwriter", ".pov");
             out = new BufferedWriter(new FileWriter(tmpFile));
@@ -50,51 +50,42 @@ public class ObjectBuilder implements POVInterface {
     }
 
 
-    private StringBuilder startTriangle(float[][] pts) {
-        StringBuilder pov_triangle = new StringBuilder(120);
-        pov_triangle.append("my_triangle(");
-        pov_triangle.append((pts[0][0]));
-        pov_triangle.append(COMMA);
-        pov_triangle.append((pts[0][1]));
-        pov_triangle.append(COMMA);
-        pov_triangle.append((pts[0][2]));
-        pov_triangle.append(COMMA);
-        pov_triangle.append((pts[1][0]));
-        pov_triangle.append(COMMA);
-        pov_triangle.append((pts[1][1]));
-        pov_triangle.append(COMMA);
-        pov_triangle.append((pts[1][2]));        
-        pov_triangle.append(COMMA);
-        pov_triangle.append((pts[2][0]));
-        pov_triangle.append(COMMA);
-        pov_triangle.append((pts[2][1]));
-        pov_triangle.append(COMMA);
-        pov_triangle.append((pts[2][2]));
-        return pov_triangle;
-    }
+//    private StringBuilder startTriangle(float[][] pts) {
+//        StringBuilder pov_triangle = new StringBuilder(120);
+//        pov_triangle.append("my_triangle(");
+//        pov_triangle.append((pts[0][0]));
+//        pov_triangle.append(COMMA);
+//        pov_triangle.append((pts[0][1]));
+//        pov_triangle.append(COMMA);
+//        pov_triangle.append((pts[0][2]));
+//        pov_triangle.append(COMMA);
+//        pov_triangle.append((pts[1][0]));
+//        pov_triangle.append(COMMA);
+//        pov_triangle.append((pts[1][1]));
+//        pov_triangle.append(COMMA);
+//        pov_triangle.append((pts[1][2]));        
+//        pov_triangle.append(COMMA);
+//        pov_triangle.append((pts[2][0]));
+//        pov_triangle.append(COMMA);
+//        pov_triangle.append((pts[2][1]));
+//        pov_triangle.append(COMMA);
+//        pov_triangle.append((pts[2][2]));
+//        return pov_triangle;
+//    }
+//
+//    /** 
+//     * Returns a line as a PovRAY cylinder (credit to Guillaume LaBelle)
+//     * @param pt1
+//     * @param pt2
+//     * @return
+//     */
+//    public StringBuilder createLine(float[] pt1, float[] pt2) {
+//        StringBuilder pov = new StringBuilder(40);
+//        startLine(pt1, pt2, pov);
+//        return pov.append(" )\n");
+//    }
 
-    /** 
-     * Returns a line as a PovRAY cylinder (credit to Guillaume LaBelle)
-     * @param pt1
-     * @param pt2
-     * @return
-     */
-    public StringBuilder createLine(float[] pt1, float[] pt2) {
-        StringBuilder pov = new StringBuilder(40);
-        startLine(pt1, pt2, pov);
-        return pov.append(" )\n");
-    }
 
-    /**
-     * This is used by PovWriter to start union around processing objects
-     * @return UNION start String 
-     */
-    public StringBuilder beginUnion(){
-        StringBuilder primitive = new StringBuilder(95); //89
-        primitive.append(INCLUDE);
-        primitive.append(UNION);        
-        return primitive.append(PRIMITIVES);
-    }
     
     /**
      * Helper function for createLine, that avoids creating a new StringBuilder
@@ -104,31 +95,31 @@ public class ObjectBuilder implements POVInterface {
      * @return 
      */
 
-    private void startLine(float[] pt1, float[] pt2, StringBuilder pov_line) {        
-        pov_line.append("my_line( ");
-        pov_line.append(pt1[0]);
-        pov_line.append(COMMA);
-        pov_line.append((pt1[1]));
-        pov_line.append(COMMA);
-        pov_line.append((pt1[2]));
-        pov_line.append(COMMA);
-        pov_line.append(pt2[0]);
-        pov_line.append(COMMA);
-        pov_line.append((pt2[1]));
-        pov_line.append(COMMA);
-        pov_line.append((pt2[2]));        
-    }
-    
-    private StringBuilder startSphere(float[] pt1, float size, StringBuilder sphere) {
-        sphere.append("my_sphere( ");
-        sphere.append(pt1[0]);
-        sphere.append(COMMA);
-        sphere.append((pt1[1]));
-        sphere.append(COMMA);
-        sphere.append((pt1[2]));
-        sphere.append(COMMA);
-        return sphere.append(size);
-    }
+//    private void startLine(float[] pt1, float[] pt2, StringBuilder pov_line) {        
+//        pov_line.append("my_line( ");
+//        pov_line.append(pt1[0]);
+//        pov_line.append(COMMA);
+//        pov_line.append((pt1[1]));
+//        pov_line.append(COMMA);
+//        pov_line.append((pt1[2]));
+//        pov_line.append(COMMA);
+//        pov_line.append(pt2[0]);
+//        pov_line.append(COMMA);
+//        pov_line.append((pt2[1]));
+//        pov_line.append(COMMA);
+//        pov_line.append((pt2[2]));        
+//    }
+//    
+//    private StringBuilder startSphere(float[] pt1, float size, StringBuilder sphere) {
+//        sphere.append("my_sphere( ");
+//        sphere.append(pt1[0]);
+//        sphere.append(COMMA);
+//        sphere.append((pt1[1]));
+//        sphere.append(COMMA);
+//        sphere.append((pt1[2]));
+//        sphere.append(COMMA);
+//        return sphere.append(size);
+//    }
 
     /**
      * Writes the line to the out_file
@@ -136,9 +127,9 @@ public class ObjectBuilder implements POVInterface {
      * @param pt2
      * @throws IOException
      */
-    public void writeLine(float[] pt1, float[] pt2) throws IOException {
-        out.append(createLine(pt1, pt2));
-    }
+//    public void writeLine(float[] pt1, float[] pt2) throws IOException {
+//        out.append(createLine(pt1, pt2));
+//    }
 
     /**
      * Writes the triangle to the out_file
@@ -146,12 +137,12 @@ public class ObjectBuilder implements POVInterface {
      * @param col
      * @throws IOException
      */
-    public void writeTriangle(float[][] pts, int col) throws IOException {
-        out.append(startTriangle(pts));
-        out.append(COMMA);
-        out.append(factory.addColor(col));
-        out.append(")\n");
-    }
+//    public void writeTriangle(float[][] pts, int col) throws IOException {
+//        out.append(startTriangle(pts));
+//        out.append(COMMA);
+//        out.append(factory.addColor(col));
+//        out.append(")\n");
+//    }
     
     /**
      * Writes the sphere to the out_file
@@ -160,13 +151,13 @@ public class ObjectBuilder implements POVInterface {
      * @param col as int
      * @throws IOException
      */
-    public void writeSphere(float[] pts, float size, int col) throws IOException {
-        StringBuilder pov = new StringBuilder(40);
-        out.append(startSphere(pts, size, pov));
-        out.append(COMMA);
-        out.append(factory.addColor(col));
-        out.append(")\n");
-    }
+//    public void writeSphere(float[] pts, float size, int col) throws IOException {
+//        StringBuilder pov = new StringBuilder(40);
+//        out.append(startSphere(pts, size, pov));
+//        out.append(COMMA);
+//        out.append(factory.addColor(col));
+//        out.append(")\n");
+//    }
 
 
     /**
