@@ -39,8 +39,10 @@ public class PovExporterTest extends PApplet {
         export = new PovExporter(this);
         arcball = new ArcBall(this, 0, 0, 0);
         export.chooseTemplate();
-        export.setPovrayPath("/usr/local/bin/povray"); //use this once to set povray path
+        export.setPovrayPath("/usr/local/bin/povray"); //use this once to set povray path        
         export.createIniFile(dataPath("balls.ini"), Quality.MEDIUM);
+        export.addDeclareOption("ScaleP5", "0.15"); // custom declare,translates Y axis in PovRAY
+        export.addDeclareOption("TransYP5", "200");
         noStroke();
         sphereDetail(18);
     }
@@ -82,17 +84,26 @@ public class PovExporterTest extends PApplet {
                     translate(120 * x, 120 * y, 120 * z);
                     int col = color(random(255), random(255), random(255)); // a nice test for my colorFactory class
                     if (x == 0 && y == 0) {
-                        export.setTexture(new Texture(Finish.GLASS, col));
-                        export.box(60);
+                        if (z == 0) {
+                            export.setTexture(new Texture(Finish.MIRROR));
+                            export.sphere(60);
+                        } else {
+                            export.setTexture(new Texture(Finish.METAL, col));
+                            export.box(60);
+                        }
+                        
                     } else {
-                        export.setTexture(new Texture(Finish.METAL, col));
-                        export.sphere(30);
+                        export.setTexture(new Texture(Finish.PHONG1, col));
                     }
+                    export.sphere(30);
                     popMatrix();
                 }
             }
+
+            //}
         }
     }
+    //}
 
     /**
      * Main

@@ -119,7 +119,7 @@ public class PrimitiveWriter {
         sphereBuilder.append(COMMA);
         sphereBuilder.append(-1.0f * zz);
         sphereBuilder.append(">, ");
-        sphereBuilder.append(radius * 0.2f);
+        sphereBuilder.append(radius);
         sphereBuilder.append('\n');
         sphereBuilder.append("texture{");
         sphereBuilder.append(tf.addTexture(texture));
