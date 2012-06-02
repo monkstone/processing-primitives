@@ -36,7 +36,7 @@ public class PovExporter {
     /**
      * Interface to RecordPovray as a String
      */
-   // public static final String POV = "primitive.RecordPovray";
+    // public static final String POV = "primitive.RecordPovray";
     private Options options;
     private Properties prop;
     private final String HOME = System.getProperty("user.home");
@@ -124,23 +124,20 @@ public class PovExporter {
         options.addDeclare("ScaleP5", String.format("%.4f", scale));
     }
 
-//    /**
-//     * Set Line Width
-//     *
-//     * @param width float (avoid spurious precision)
-//     */
-//    public void lineWidth(float width) {
-//        options.addDeclare("SWIDTH", String.format("%.2f", width));
-//    }
-//
-//    /**
-//     * Overloaded function to deal with in input Set Line Width
-//     *
-//     * @param width int (avoid spurious precision)
-//     */
-//    public void lineWidth(int width) {
-//        options.addDeclare("SWIDTH", String.format("%d", width));
-//    }
+    public void rotateX(float rx) {
+        parent.rotateX(PApplet.radians(rx));
+        this.primitiveWriter.rotateX(rx);
+    }
+
+    public void rotateY(float ry) {
+        parent.rotateY(PApplet.radians(ry));
+        this.primitiveWriter.rotateY(ry);
+    }
+
+    public void rotateZ(float rz) {
+        parent.rotateZ(PApplet.radians(rz));
+        this.primitiveWriter.rotateZ(rz);
+    }
 
     /**
      * Rotate processing sketch elements within PovRAY scene (Y)

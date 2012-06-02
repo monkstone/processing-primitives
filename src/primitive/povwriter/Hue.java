@@ -1,10 +1,26 @@
+/**
+ *
+ * The purpose of this library is to allow the export of processing sketches to
+ * PovRAY Copyright (C) 2012 Martin Prout This library is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation; either version
+ * 2.1 of the License, or (at your option) any later version.
+ *
+ * Obtain a copy of the license at http://www.gnu.org/licenses/lgpl-2.1.html
+ */
+
 package primitive.povwriter;
 
 /**
- * 
- * @author sid
+ * Here I use Hue to avoid obvious name-space clashes with processing 
+ * java.awt.Color etc. The calculated int corresponds to the int stored by
+ * processing for a given hue (supports RGB and RGBF), the int is used by
+ * by my PovrayColorFactory to return a Povray color (from map, or newly
+ * created by factory and stored in map for future use.
+ *
+ * @author Martin Prout
  */
-public enum Colour {
+public enum Hue {
     /**
      * 
      */
@@ -80,7 +96,7 @@ public enum Colour {
     
     private final int colour;
 
-    Colour(int colour) {
+    Hue(int colour) {
         this.colour = colour;
     }
 

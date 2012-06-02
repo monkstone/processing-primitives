@@ -1,12 +1,27 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * The purpose of this library is to allow the export of processing sketches to
+ * PovRAY Copyright (C) 2012 Martin Prout This library is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation; either version
+ * 2.1 of the License, or (at your option) any later version.
+ *
+ * Obtain a copy of the license at http://www.gnu.org/licenses/lgpl-2.1.html
  */
+
 package primitive.povwriter;
 
 /**
+ * Here I use Texture which I might need to change to avoid obvious name-space
+ * clash with processing Texture (was briefly PTexture).
+ * The combination of Finish and the int matching the processing color from Hue
+ * are used to create a hash that gets used by my TextureFactory to return a 
+ * Texture, where no Hue is supplied default White is used to create an int, 
+ * which (may/may not) even get used in Texture see MIRROR, RED_MARBLE Finish
  *
- * @author sid
+ * @author Martin Prout
+ * @see Hue
+ * @see Finish
  */
 public class Texture {
 
@@ -28,7 +43,7 @@ public class Texture {
      * @param finish
      * @param colour
      */
-    public Texture(Finish finish, Colour colour) {
+    public Texture(Finish finish, Hue colour) {
         this(finish, colour.color());
     }
 
@@ -37,7 +52,7 @@ public class Texture {
      * @param finish
      */
     public Texture(Finish finish) {
-        this(finish, Colour.WHITE.color()); //default white color
+        this(finish, Hue.WHITE.color()); //default white color
     }
 
     /**

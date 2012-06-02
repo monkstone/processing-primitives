@@ -11,7 +11,6 @@ package primitive;
 
 import primitive.povwriter.Finish;
 import primitive.povwriter.Texture;
-import primitive.ui.arcball.ArcBall;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -23,8 +22,6 @@ import processing.core.PImage;
  * @author Martin Prout
  */
 public class PovExporterTest extends PApplet {
-
-    ArcBall arcball;
     PovExporter export;
     int[] DATA = {
         -1, 0, 1
@@ -37,7 +34,7 @@ public class PovExporterTest extends PApplet {
     public void setup() {
         size(1280, 1024, P3D);
         export = new PovExporter(this);
-        arcball = new ArcBall(this, 0, 0, 0);
+        camera(250.0f, 10.0f, 250.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         export.chooseTemplate();
         export.setPovrayPath("/usr/local/bin/povray"); //use this once to set povray path        
         export.createIniFile(dataPath("balls.ini"), Quality.MEDIUM);
@@ -58,7 +55,6 @@ public class PovExporterTest extends PApplet {
             lights();        // this needs to be outside the record loop
             export.beginRaw(dataPath("balls.pov"));
             background(200);
-            arcball.update();
             render();
             export.endRaw();  // needs to match begin raw (in nesting etc)
         }
@@ -100,10 +96,8 @@ public class PovExporterTest extends PApplet {
                 }
             }
 
-            //}
         }
     }
-    //}
 
     /**
      * Main

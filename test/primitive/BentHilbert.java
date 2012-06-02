@@ -3,8 +3,6 @@ package primitive;
 import java.text.CharacterIterator;
 import lsystem.Grammar;
 import lsystem.SimpleGrammar;
-import primitive.ui.arcball.ArcBall;
-import primitive.ui.arcball.Constrain;
 import processing.core.PApplet;
 import processing.core.PImage;
 
@@ -16,12 +14,11 @@ import processing.core.PImage;
 public class BentHilbert extends PApplet {
 
     PovExporter export;
-    ArcBall arcball;
     Grammar grammar;
-    float distance = 72;
+    float distance = 100;
     int depth = 3;
-    float theta = radians(90);
-    float phi = radians(90);
+    float theta = 90;
+    float phi = 90;
     String production = "";
 
     /**
@@ -29,16 +26,15 @@ public class BentHilbert extends PApplet {
      */
     @Override
     public void setup() {
-        size(500, 500, OPENGL);
+        size(500, 500, P3D);
+        camera(250.0f, 10.0f, 250.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         setupGrammar();
         noStroke();
         export = new PovExporter(this);
-        arcball = new ArcBall(this, 0, 0, 0);
-        arcball.constrain(Constrain.YAXIS);
         export.chooseTemplate();
         export.setPovrayPath("/usr/local/bin/povray"); //use this once to set povray path
         // Quality PREVIEW, MEDIUM, HIGH, HIGHEST, GRAYSCALE
-        export.createIniFile(dataPath("ftest.ini"), Quality.HIGH);
+        export.createIniFile(dataPath("hilbert.ini"), Quality.MEDIUM);
         export.addDeclareOption("TransYP5", "10"); // custom declare,translates Y axis in PovRAY
     }
 
@@ -53,7 +49,6 @@ public class BentHilbert extends PApplet {
             background(200);
             lights();        // this needs to be outside the record loop
             export.beginRaw(dataPath("hilbert.pov"));  // begin tracing
-            arcball.update();
             render();
             export.endRaw();  //end tracing
         }
@@ -90,27 +85,27 @@ public class BentHilbert extends PApplet {
         for (char ch = it.first(); ch != CharacterIterator.DONE; ch = it.next()) {
             switch (ch) {
                 case 'F':
-                    translate(0, distance / -2, 0);
+                    translate(0, -distance/2, 0);
                     export.box(distance / 9, distance, distance / 9);
-                    translate(0, distance / -2, 0);
+                    translate(0, -distance/2, 0);
                     break;
                 case '-':
-                    rotateX(theta);
+                    export.rotateX(theta);
                     break;
                 case '+':
-                    rotateX(-theta);
+                    export.rotateX(-theta);
                     break;
                 case '>':
-                    rotateY(theta);
+                    export.rotateY(theta);
                     break;
                 case '<':
-                    rotateY(-theta);
+                    export.rotateY(-theta);
                     break;
                 case '&':
-                    rotateZ(-phi);
+                    export.rotateZ(-phi);
                     break;
                 case '^':
-                    rotateZ(phi);
+                    export.rotateZ(phi);
                     break;
                 case 'X':
                     break;

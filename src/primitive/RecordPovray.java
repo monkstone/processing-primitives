@@ -113,6 +113,5 @@ public class RecordPovray {
     private void writeFooter() {
         pov_writer.declare(include_file);
         pov_writer.dispose(); // NB: this where PovRAY out file gets closed
-        System.out.println("(Recording Done)");
     }
 }

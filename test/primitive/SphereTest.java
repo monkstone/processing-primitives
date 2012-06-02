@@ -27,6 +27,7 @@ public class SphereTest extends PApplet {
     @Override
     public void setup() {
         size(600, 600, P3D);
+        camera(250.0f, 10.0f, 250.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f);
         export = new PovExporter(this);
         export.setPovrayPath("/usr/local/bin/povray");
         export.chooseTemplate();

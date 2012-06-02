@@ -9,8 +9,8 @@
  */
 package primitive;
 
-import primitive.povwriter.Colour;
 import primitive.povwriter.Finish;
+import primitive.povwriter.Hue;
 import primitive.povwriter.Texture;
 import processing.core.PApplet;
 import processing.core.PImage;
@@ -76,7 +76,7 @@ public class FTest extends PApplet {
         export.setTexture(new Texture(Finish.CHROME));
         export.box(50);
         translate(0, -50, 0);
-        export.setTexture(new Texture(Finish.PHONG0, Colour.RED));
+        export.setTexture(new Texture(Finish.PHONG0, Hue.RED));
         export.box(50);
         translate(50, 0, 0);
         export.box(50);        

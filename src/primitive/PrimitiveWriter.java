@@ -15,6 +15,9 @@ public class PrimitiveWriter {
     private PrintWriter primitiveWriter;
     private TextureFactory tf;
     private Texture currentTexture = null;
+    private float rx;
+    private float ry;
+    private float rz;
 
     /**
      *
@@ -24,6 +27,13 @@ public class PrimitiveWriter {
         this.primitiveWriter = writer;
         this.tf = TextureFactory.getFactory();
         declarePrimitives();
+        initRot();
+    }
+
+    private void initRot() {
+        rx = 0;
+        ry = 0;
+        rz = 0;
     }
 
     /**
@@ -60,10 +70,18 @@ public class PrimitiveWriter {
         boxBuilder.append(COMMA);
         boxBuilder.append(-1.0f * zz);
         boxBuilder.append(">\n");
+        boxBuilder.append("rotate<");
+        boxBuilder.append(rx);
+        boxBuilder.append(COMMA);
+        boxBuilder.append(ry);
+        boxBuilder.append(COMMA);
+        boxBuilder.append(rz);
+        boxBuilder.append(">\n");
         boxBuilder.append("texture{");
         boxBuilder.append(tf.addTexture(currentTexture));
-        boxBuilder.append("}\n");        
+        boxBuilder.append("}\n");
         this.primitiveWriter.append(boxBuilder.append("}\n"));
+        initRot();
     }
 
     /**
@@ -156,5 +174,17 @@ public class PrimitiveWriter {
         this.primitiveWriter.append("}\n");
         primitiveWriter.flush();
         primitiveWriter.close();
+    }
+
+    public void rotateX(float rx) {
+        this.rx += rx;
+    }
+
+    public void rotateY(float ry) {
+        this.ry -= ry;
+    }
+
+    public void rotateZ(float rz) {
+        this.rz -= rz;
     }
 }

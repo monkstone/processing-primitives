@@ -1,6 +1,12 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * The purpose of this library is to allow the export of processing sketches to
+ * PovRAY Copyright (C) 2012 Martin Prout This library is free software; you can
+ * redistribute it and/or modify it under the terms of the GNU Lesser General
+ * Public License as published by the Free Software Foundation; either version
+ * 2.1 of the License, or (at your option) any later version.
+ *
+ * Obtain a copy of the license at http://www.gnu.org/licenses/lgpl-2.1.html
  */
 package primitive.povwriter;
 
@@ -11,15 +17,23 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
+ * The combination of Finish and the int matching the processing color from Hue
+ * are used to create a hash that gets used by TextureFactory to return a 
+ * Texture, where no Hue is supplied default White is used to create an int, 
+ * which (may/may not) even get used in Texture see MIRROR, RED_MARBLE Finish.
+ * Note the use of EnumSet to store Finish and hence what Finish need either
+ * including/and or declaring in the povray file (prevents unnecessary including
+ * and/or declaring, and multiples thereof)
  *
- * @author sid
+ * @author Martin Prout
+ * @see Hue
+ * @see Finish
  */
 public class TextureFactory {
 
     private EnumSet<Finish> finishSet;
     private Set<Texture> textureSet;
     private Map<Integer, String> textureMap;
-    static TextureFactory factory = new TextureFactory();
 
     private TextureFactory() {
         this.textureSet = new HashSet<Texture>();
@@ -35,7 +49,7 @@ public class TextureFactory {
      * 
      * @return
      */
-    public static TextureFactory getFactory() { // to declare getFactory makes no sense
+    public static TextureFactory getFactory() { 
         return TextureFactory.FactoryHolder.INSTANCE;
     }
 

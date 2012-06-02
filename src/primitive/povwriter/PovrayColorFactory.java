@@ -29,7 +29,6 @@ public class PovrayColorFactory implements POVInterface {
     int tCount = -1;
     private HashMap<Integer, String> colourMap;
     private List<Integer> declareList;
-    static PovrayColorFactory factory = new PovrayColorFactory();
 
     /**
      * Private constructor, for singleton, initialize collections, and add
@@ -46,23 +45,23 @@ public class PovrayColorFactory implements POVInterface {
      * 
      */
     public final void initializeColors() {
-        this.colourMap.put(Colour.WHITE.color(), "White");
-        this.colourMap.put(Colour.BLACK.color(), "Black");
-        this.colourMap.put(Colour.BLUE.color(), "Blue");
-        this.colourMap.put(Colour.RED.color(), "Red");
-        this.colourMap.put(Colour.GREEN.color(), "Green");
-        this.colourMap.put(Colour.YELLOW.color(), "Yellow");
-        this.colourMap.put(Colour.COPPER.color(), "CopperMetal");
-        this.colourMap.put(Colour.BRASS.color(), "BrassMetal");
-        this.colourMap.put(Colour.CHROME.color(), "ChromeMetal");
-        this.colourMap.put(Colour.BUDDHA_GOLD.color(), "BuddhaGold");
-        this.colourMap.put(Colour.BRIGHT_GOLD.color(), "BrightGold");
-        this.colourMap.put(Colour.SILVER.color(), "Silver");
-        this.colourMap.put(Colour.CYAN.color(), "Cyan");
-        this.colourMap.put(Colour.MAGENTA.color(), "Magenta");
-        this.colourMap.put(Colour.CORNELL_RED.color(), "CornellRed");
-        this.colourMap.put(Colour.CORNELL_RED.color(), "CornellGreen");
-        this.colourMap.put(Colour.SILVER.color(), "Silver");
+        this.colourMap.put(Hue.WHITE.color(), "White");
+        this.colourMap.put(Hue.BLACK.color(), "Black");
+        this.colourMap.put(Hue.BLUE.color(), "Blue");
+        this.colourMap.put(Hue.RED.color(), "Red");
+        this.colourMap.put(Hue.GREEN.color(), "Green");
+        this.colourMap.put(Hue.YELLOW.color(), "Yellow");
+        this.colourMap.put(Hue.COPPER.color(), "CopperMetal");
+        this.colourMap.put(Hue.BRASS.color(), "BrassMetal");
+        this.colourMap.put(Hue.CHROME.color(), "ChromeMetal");
+        this.colourMap.put(Hue.BUDDHA_GOLD.color(), "BuddhaGold");
+        this.colourMap.put(Hue.BRIGHT_GOLD.color(), "BrightGold");
+        this.colourMap.put(Hue.SILVER.color(), "Silver");
+        this.colourMap.put(Hue.CYAN.color(), "Cyan");
+        this.colourMap.put(Hue.MAGENTA.color(), "Magenta");
+        this.colourMap.put(Hue.CORNELL_RED.color(), "CornellRed");
+        this.colourMap.put(Hue.CORNELL_RED.color(), "CornellGreen");
+        this.colourMap.put(Hue.SILVER.color(), "Silver");
         this.colourMap.put(-6452, "LineFill");
         this.colourMap.put(-11585249, "LineCol");
         this.colourMap.put(-1275074868, "TransFill");
@@ -72,11 +71,11 @@ public class PovrayColorFactory implements POVInterface {
      * 
      */
     public final void initializeDeclares() {
-        this.declareList.add(Colour.COPPER.color());
-        this.declareList.add(Colour.BRASS.color());
-        this.declareList.add(Colour.CHROME.color());
-        this.declareList.add(Colour.BUDDHA_GOLD.color());
-        this.declareList.add(Colour.BRIGHT_GOLD.color());
+        this.declareList.add(Hue.COPPER.color());
+        this.declareList.add(Hue.BRASS.color());
+        this.declareList.add(Hue.CHROME.color());
+        this.declareList.add(Hue.BUDDHA_GOLD.color());
+        this.declareList.add(Hue.BRIGHT_GOLD.color());
     }
 
     /**
